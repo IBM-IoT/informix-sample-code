@@ -2,13 +2,13 @@ import paho.mqtt.client as mqtt
 
 import json
 import pprint
-import time
+from datetime import datetime 
 from json import JSONEncoder
 
 NUMINS=20000
 
 def on_publish(client,userdata,mid):
-   print "MID Published: " , mid 
+   print ("MID Published: " , mid )
    if ( mid == NUMINS):
       client.disconnect()
 
@@ -17,13 +17,12 @@ def on_publish(client,userdata,mid):
 client = mqtt.Client(protocol=mqtt.MQTTv31)
 client.on_publish = on_publish
 
-client.connect("50.23.106.210", 27883) # 10.0.68.69
-#client.connect("50.23.106.210", 1883) # 10.0.68.69
+client.connect("127.0.0.1", 27883) # 10.0.68.69
 
 client.loop_start()
 
 for i in range(1,NUMINS + 1):
-   ct = time.strftime("%Y-%m-%d %H:%M:%S.00000");
+   ct = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-1];
    msg = JSONEncoder().encode( {  
       "sensor_id":"4",
       "tstamp" : ct,
@@ -35,7 +34,7 @@ for i in range(1,NUMINS + 1):
    (result,mid) = client.publish("wd.sensors_vti", msgstr,qos=0)
    #print "Result, mid: ", result,mid
    if ( result != mqtt.MQTT_ERR_SUCCESS) :
-         print "Error Publish: ", i
+         print ("Error Publish: ", i)
 
  
    #client.loop(5.0, 1000) 
@@ -43,7 +42,7 @@ for i in range(1,NUMINS + 1):
    #print "JSON: " + json.dumps(msg,sort_keys=True,indent=4)
 
    if ( (i % 1000) == 0 ):
-      print "I: " , i 
+      print ("I: " , i) 
       #time.sleep(.5)
 
 
