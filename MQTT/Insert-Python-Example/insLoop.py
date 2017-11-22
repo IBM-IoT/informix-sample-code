@@ -5,12 +5,14 @@ import pprint
 from datetime import datetime 
 from json import JSONEncoder
 
-NUMINS=20000
+NUMINS = 20000
 
-def on_publish(client,userdata,mid):
-   print ("MID Published: " , mid )
-   if ( mid == NUMINS):
-      client.disconnect()
+def on_publish(client, userdata, mid):
+    """ on_publish:
+    """
+    print("MID Published: ", mid)
+    if mid == NUMINS:
+        client.disconnect()
 
 
 
