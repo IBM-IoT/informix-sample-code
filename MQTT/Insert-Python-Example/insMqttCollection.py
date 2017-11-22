@@ -1,3 +1,6 @@
+"""  No database should exist.  This inserts into a collection so it will
+     create the database and table
+"""
 from json import JSONEncoder
 from datetime import datetime
 import paho.mqtt.client as mqtt
@@ -11,26 +14,6 @@ def on_publish(client, userdata, mid):
     print("MID Published: ", mid)
     if mid == NUMINS:
         client.disconnect()
-
-
- # def insert_collection():
- #     """ insertCollection
- #     """
- #     for i in range(1, NUMINS + 1):
- #         ct = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-1]
- #         msg = JSONEncoder().encode({
- #               "sensor_id":"4",
- #               "tstamp" : ct,
- #               "d" : {"col4": "king bob"}
- #               })
- #         msgstr = '{  "sensor_id":%d, "tstamp" : "%s",  "d" : { "col4": "king bob"}  }'  % (i, ct)
-#         (result, mid) = client.publish("wd.sensors_vti", msgstr, qos=0)
-#         if result != mqtt.MQTT_ERR_SUCCESS:
-#               print("Error Publish: ", i)
-#         if  (i % 1000) == 0:
-#             print("I: ", i)
-
-
 
 
 client = mqtt.Client(protocol=mqtt.MQTTv31)
@@ -51,7 +34,7 @@ for i in range(1, NUMINS + 1):
         })
     msgstr = '{  "sensor_id":%d, "tstamp" : "%s",  "d" : { "col4": "king bob"}  }'  % (i, ct)
 
-    (result, mid) = client.publish("wd.sensors_vti", msgstr, qos=0)
+    (result, mid) = client.publish("mongo_db.collection1", msgstr, qos=0)
     if result != mqtt.MQTT_ERR_SUCCESS:
         print("Error Publish: ", i)
 
