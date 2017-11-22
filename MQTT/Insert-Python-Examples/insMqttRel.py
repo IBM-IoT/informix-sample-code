@@ -1,5 +1,6 @@
-"""  Uses iot_db.sql to insert into a vti timeseries table
+""" Uses db1.sql To insert into a relational table
 """
+
 from json import JSONEncoder
 from datetime import datetime
 import paho.mqtt.client as mqtt
@@ -30,9 +31,9 @@ for i in range(1, NUMINS + 1):
         "tstamp" : ct,
         "d" : {"col4": "king bob"}
         })
-    msgstr = '{  "id":%d, "desc":"description data",  "ts" : "%s",  "reading" : { "col4": "king bob"}  }'  % (i, ct)
+    msgstr = '{  "col1":%d, "col2" :%d, "col3":"%s"}'  % (i, i+1,"bob")
 
-    (result, mid) = client.publish("iot.iot_data_v", msgstr, qos=0)
+    (result, mid) = client.publish("db1.tab1", msgstr, qos=1)
     if result != mqtt.MQTT_ERR_SUCCESS:
         print("Error Publish: ", i)
 

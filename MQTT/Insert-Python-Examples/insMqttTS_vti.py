@@ -1,5 +1,4 @@
-"""  No database should exist.  This inserts into a collection so it will
-     create the database and table
+"""  Uses iot_db.sql to insert into a vti timeseries table
 """
 from json import JSONEncoder
 from datetime import datetime
@@ -23,7 +22,6 @@ client.connect("127.0.0.1", 27883)
 
 client.loop_start()
 
-insertCollection()
 
 for i in range(1, NUMINS + 1):
     ct = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-1]
@@ -32,9 +30,9 @@ for i in range(1, NUMINS + 1):
         "tstamp" : ct,
         "d" : {"col4": "king bob"}
         })
-    msgstr = '{  "sensor_id":%d, "tstamp" : "%s",  "d" : { "col4": "king bob"}  }'  % (i, ct)
+    msgstr = '{  "id":%d, "desc":"description data",  "ts" : "%s",  "reading" : { "col4": "king bob"}  }'  % (i, ct)
 
-    (result, mid) = client.publish("mongo_db.collection1", msgstr, qos=0)
+    (result, mid) = client.publish("iot.iot_data_v", msgstr, qos=1)
     if result != mqtt.MQTT_ERR_SUCCESS:
         print("Error Publish: ", i)
 
