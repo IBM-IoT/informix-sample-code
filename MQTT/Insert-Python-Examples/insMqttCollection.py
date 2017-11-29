@@ -6,7 +6,7 @@ from datetime import datetime
 import paho.mqtt.client as mqtt
 
 
-NUMINS = 20000
+NUMINS = 10 
 
 def on_publish(client, userdata, mid):
     """ on_publish:

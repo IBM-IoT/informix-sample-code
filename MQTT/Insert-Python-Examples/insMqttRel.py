@@ -1,4 +1,4 @@
-""" Uses db1.sql To insert into a relational table
+""" Uses iot_db.sql To insert into a relational table
 """
 
 from json import JSONEncoder
@@ -6,7 +6,7 @@ from datetime import datetime
 import paho.mqtt.client as mqtt
 
 
-NUMINS = 20000
+NUMINS = 10 
 
 def on_publish(client, userdata, mid):
     """ on_publish:
@@ -33,7 +33,7 @@ for i in range(1, NUMINS + 1):
         })
     msgstr = '{  "col1":%d, "col2" :%d, "col3":"%s"}'  % (i, i+1,"bob")
 
-    (result, mid) = client.publish("db1.tab1", msgstr, qos=1)
+    (result, mid) = client.publish("iot.tab1", msgstr, qos=1)
     if result != mqtt.MQTT_ERR_SUCCESS:
         print("Error Publish: ", i)
 

@@ -1,3 +1,0 @@
-dbaccess iot - <<!
-select id,ts,reading::json from iot_data_v
-!

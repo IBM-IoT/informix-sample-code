@@ -79,3 +79,16 @@ execute procedure TSCreateVirtualTab (
 	'iot_data_v', 
 	'iot_data_ts', 
 	'origin(2017-07-01 00:00:00.00000),calendar(ts_1min),container(iot_data_cont),threshold(0),irregular',0,'readings');
+
+
+--
+-- Create the table (relational)
+--
+
+create table tab1
+(
+   col1 integer,
+   col2 integer,
+   col3 char(50)
+);
+
