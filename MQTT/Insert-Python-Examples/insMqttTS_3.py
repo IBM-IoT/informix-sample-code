@@ -5,7 +5,6 @@
 
      This insert does not use the column "json_data" defined in the rowtype 
 """
-from json import JSONEncoder
 from datetime import datetime
 import paho.mqtt.client as mqtt
 import time

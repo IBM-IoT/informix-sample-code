@@ -22,8 +22,6 @@ client.connect("127.0.0.1", 27883)
 
 client.loop_start()
 
-insertCollection()
-
 for i in range(1, NUMINS + 1):
     ct = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-1]
     msgstr = '{  "sensor_id":%d, "tstamp" : "%s",  "d" : { "col4": "king bob"}  }'  % (i, ct)
