@@ -26,7 +26,7 @@ client.loop_start()
 """
 for i in range(1, NUMINS + 1):
     ct = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-1]
-    msgstr = '{  "id":%d, "desc":"description data",  "ts" : "%s",  "reading" : { "col4": "king bob"}  }'  % (i, ct)
+    msgstr = '{  "id":%d, "desc":"description data",  "ts" : "%s",  "json_data" : { "col4": "king bob"}  }'  % (i, ct)
 
     (result, mid) = client.publish("iot.iot_data_v", msgstr, qos=1)
     if result != mqtt.MQTT_ERR_SUCCESS:

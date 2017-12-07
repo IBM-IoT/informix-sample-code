@@ -48,7 +48,7 @@ drop row type if exists iot_data_t restrict;
 
 create row type iot_data_t (
 	ts datetime year to fraction(5),
- 	reading BSON);
+ 	json_data BSON);
 
 --
 -- Destroy and (re-)create the Informix time series containers
@@ -66,7 +66,7 @@ execute procedure TSContainerCreate ( 'iot_data_cont', 'rootdbs', 'iot_data_t', 
 create table iot_data_ts ( 
 	id INT8, 
 	desc VARCHAR(128),
-	readings TIMESERIES(iot_data_t), 
+	data TIMESERIES(iot_data_t), 
 	PRIMARY KEY (id) ) 
 lock mode row;
 
@@ -78,7 +78,7 @@ lock mode row;
 execute procedure TSCreateVirtualTab ( 
 	'iot_data_v', 
 	'iot_data_ts', 
-	'origin(2017-07-01 00:00:00.00000),calendar(ts_1min),container(iot_data_cont),threshold(0),irregular',0,'readings');
+	'origin(2017-07-01 00:00:00.00000),calendar(ts_1min),container(iot_data_cont),threshold(0),irregular',0,'data');
 
 
 --

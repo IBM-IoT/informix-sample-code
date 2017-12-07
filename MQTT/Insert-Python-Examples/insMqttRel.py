@@ -1,7 +1,6 @@
 """ Uses iot_db.sql To insert into a relational table
 """
 
-from json import JSONEncoder
 from datetime import datetime
 import paho.mqtt.client as mqtt
 
@@ -26,12 +25,7 @@ client.loop_start()
 
 for i in range(1, NUMINS + 1):
     ct = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-1]
-    msg = JSONEncoder().encode({
-        "sensor_id":"4",
-        "tstamp" : ct,
-        "d" : {"col4": "king bob"}
-        })
-    msgstr = '{  "col1":%d, "col2" :%d, "col3":"%s"}'  % (i, i+1,"bob")
+    msgstr = '{  "col1":%d, "col2" :%d, "col3":"%s"}'  % (i, i+1,"king bob")
 
     (result, mid) = client.publish("iot.tab1", msgstr, qos=1)
     if result != mqtt.MQTT_ERR_SUCCESS:
