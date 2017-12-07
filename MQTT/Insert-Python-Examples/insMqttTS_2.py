@@ -3,7 +3,6 @@
      For the timestamp value it uses a datetime string year to fraction(5)
      Example: 2017-06-04 08:20:30.05467
 """
-from json import JSONEncoder
 from datetime import datetime
 import paho.mqtt.client as mqtt
 import time
@@ -33,7 +32,7 @@ for i in range(1, NUMINS + 1):
     currentTimeInt = int(currentTimeNow*1000)
     currentTimeStr = datetime.fromtimestamp(currentTimeNow).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-1]
 
-    msgstr = '{  "id":1,  "ts" : "%s",  "json_data": {"col1"  : "king bob"  } }'  % (currentTimeStr) 
+    msgstr = '{  "id":1,  "ts" : "%s",  "col1"  : "king bob", "col2": "kevin"  }'  % (currentTimeStr) 
 
 
     print("Publish ",msgstr)

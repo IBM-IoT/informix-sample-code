@@ -1,6 +1,5 @@
 """  Uses iot_db.sql to insert into a vti timeseries table
 """
-from json import JSONEncoder
 from datetime import datetime
 import paho.mqtt.client as mqtt
 
